@@ -1,16 +1,16 @@
-
+// code
 var AI = AI||{};
 
-AI.historyTable	=	{};		//å†å²è¡¨
+AI.historyTable	=	{};		//ÀúÊ·±í
 
 
-//äººå·¥æ™ºèƒ½åˆå§‹åŒ–
+//ÈË¹¤ÖÇÄÜ³õÊ¼»¯
 AI.init = function(pace){
-	var bill = AI.historyBill || com.gambit; //å¼€å±€åº“
+	var bill = AI.historyBill || com.gambit; //¿ª¾Ö¿â
 	if (bill.length){
 		var len=pace.length;
 		var arr=[];
-		//å…ˆæœç´¢æ£‹è°±
+		//ÏÈËÑË÷ÆåÆ×
 		for (var i=0;i< bill.length;i++){
 			if (bill[i].slice(0,len)==pace) {
 			arr.push(bill[i]);
@@ -25,7 +25,7 @@ AI.init = function(pace){
 		}
 		
 	}
-	 //å¦‚æœæ£‹è°±é‡Œé¢æ²¡æœ‰ï¼Œäººå·¥æ™ºèƒ½å¼€å§‹è¿ä½œ
+	 //Èç¹ûÆåÆ×ÀïÃæÃ»ÓĞ£¬ÈË¹¤ÖÇÄÜ¿ªÊ¼ÔË×÷
 	var initTime = new Date().getTime();
 	AI.treeDepth=play.depth;
 	//AI.treeDepth=4;
@@ -43,20 +43,20 @@ AI.init = function(pace){
 	if (val&&val.value!=-8888) {
 		var man = play.mans[val.key];
 		var nowTime= new Date().getTime();
-		// com.get("moveInfo").innerHTML='<h3>AIæœç´¢ç»“æœï¼š</h3>æœ€ä½³ç€æ³•ï¼š'+
+		// com.get("moveInfo").innerHTML='<h3>AIËÑË÷½á¹û£º</h3>×î¼Ñ×Å·¨£º'+
 		// 								com.createMove(com.arr2Clone(play.map),man.x,man.y,val.x,val.y)+
-		// 								'<br />æœç´¢æ·±åº¦ï¼š'+AI.treeDepth+'<br />æœç´¢åˆ†æ”¯ï¼š'+
-		// 								AI.number+'ä¸ª <br />æœ€ä½³ç€æ³•è¯„ä¼°ï¼š'+
-		// 								val.value+'åˆ†'+
-		// 								' <br />æœç´¢ç”¨æ—¶ï¼š'+
-		// 								(nowTime-initTime)+'æ¯«ç§’'
+		// 								'<br />ËÑË÷Éî¶È£º'+AI.treeDepth+'<br />ËÑË÷·ÖÖ§£º'+
+		// 								AI.number+'¸ö <br />×î¼Ñ×Å·¨ÆÀ¹À£º'+
+		// 								val.value+'·Ö'+
+		// 								' <br />ËÑË÷ÓÃÊ±£º'+
+		// 								(nowTime-initTime)+'ºÁÃë'
 		return [man.x,man.y,val.x,val.y]
 	}else {
 		return false;	
 	}
 }
 
-//è¿­ä»£åŠ æ·±æœç´¢ç€æ³•
+//µü´ú¼ÓÉîËÑË÷×Å·¨
 AI.iterativeSearch = function (map, my){
 	var timeOut=100;
 	var initDepth = 1;
@@ -76,7 +76,7 @@ AI.iterativeSearch = function (map, my){
 	return false;
 }
 
-//å–å¾—æ£‹ç›˜ä¸Šæ‰€æœ‰æ£‹å­
+//È¡µÃÆåÅÌÉÏËùÓĞÆå×Ó
 AI.getMapAllMan = function (map, my){
 	var mans=[];
 	for (var i=0; i<map.length; i++){
@@ -93,9 +93,9 @@ AI.getMapAllMan = function (map, my){
 }
 
 /*
-//å–å¾—æ£‹è°±æ‰€æœ‰å·±æ–¹æ£‹å­çš„ç€æ³•
+//È¡µÃÆåÆ×ËùÓĞ¼º·½Æå×ÓµÄ×Å·¨
 AI.getMoves = function (map, my, txtMap){
-	var highMores = [];   //ä¼˜å…ˆçº§é«˜çš„ç€æ³•
+	var highMores = [];   //ÓÅÏÈ¼¶¸ßµÄ×Å·¨
 	var manArr = AI.getMapAllMan (map, my);
 	var moves = [];
 	var history=AI.historyTable[txtMap];
@@ -113,7 +113,7 @@ AI.getMoves = function (map, my, txtMap){
 	return highMores.concat(moves);
 }
 */
-//å–å¾—æ£‹è°±æ‰€æœ‰å·±æ–¹æ£‹å­çš„ç€æ³•
+//È¡µÃÆåÆ×ËùÓĞ¼º·½Æå×ÓµÄ×Å·¨
 AI.getMoves = function (map, my){
 	var manArr = AI.getMapAllMan (map, my);
 	var moves = [];
@@ -127,7 +127,7 @@ AI.getMoves = function (map, my){
 			var y=man.y;
 			var newX=val[n][0];
 			var newY=val[n][1];
-			 //å¦‚æœä¸æ˜¯é•¿å°†ç€æ³•
+			 //Èç¹û²»ÊÇ³¤½«×Å·¨
 			if (foul[0]!=x || foul[1]!=y || foul[2]!=newX || foul[3]!=newY ){
 				moves.push([x,y,newX,newY,man.key])
 			}
@@ -135,7 +135,7 @@ AI.getMoves = function (map, my){
 	}
 	return moves;
 }
-//A:å½“å‰æ£‹æ‰‹value/B:å¯¹æ‰‹value/depthï¼šå±‚çº§
+//A:µ±Ç°ÆåÊÖvalue/B:¶ÔÊÖvalue/depth£º²ã¼¶
 AI.getAlphaBeta = function (A, B, depth, map ,my) { 
 	//var txtMap= map.join();
 	//var history=AI.historyTable[txtMap];
@@ -143,15 +143,15 @@ AI.getAlphaBeta = function (A, B, depth, map ,my) {
 	//		return 	history.value*my;
 	//}
 	if (depth == 0) {
-		return {"value":AI.evaluate(map , my)}; //å±€é¢è¯„ä»·å‡½æ•°; 
-ã€€	}
-ã€€	var moves = AI.getMoves(map , my ); //ç”Ÿæˆå…¨éƒ¨èµ°æ³•; 
-ã€€	//è¿™é‡Œæ’åºä»¥åä¼šå¢åŠ æ•ˆç‡
+		return {"value":AI.evaluate(map , my)}; //¾ÖÃæÆÀ¼Ûº¯Êı; 
+¡¡	}
+¡¡	var moves = AI.getMoves(map , my ); //Éú³ÉÈ«²¿×ß·¨; 
+¡¡	//ÕâÀïÅÅĞòÒÔºó»áÔö¼ÓĞ§ÂÊ
 
 	for (var i=0; i < moves.length; i++) {
 		
 		
-ã€€ã€€	//èµ°è¿™ä¸ªèµ°æ³•;
+¡¡¡¡	//×ßÕâ¸ö×ß·¨;
 		var move= moves[i];
 		var key = move[4];
 		var oldX= move[0];
@@ -165,7 +165,7 @@ AI.getAlphaBeta = function (A, B, depth, map ,my) {
 		play.mans[key].x = newX;
 		play.mans[key].y = newY;
 		
-	ã€€ã€€if (clearKey=="j0"||clearKey=="J0") {//è¢«åƒè€å°†,æ’¤æ¶ˆè¿™ä¸ªèµ°æ³•; 
+	¡¡¡¡if (clearKey=="j0"||clearKey=="J0") {//±»³ÔÀÏ½«,³·ÏûÕâ¸ö×ß·¨; 
 			play.mans[key]	.x = oldX;
 			play.mans[key]	.y = oldY;
 			map[ oldY ][ oldX ] = key;
@@ -177,11 +177,11 @@ AI.getAlphaBeta = function (A, B, depth, map ,my) {
 
 			return {"key":key,"x":newX,"y":newY,"value":8888};
 			//return rootKey; 
-	ã€€ã€€}else { 
-	ã€€ã€€	var val = -AI.getAlphaBeta(-B, -A, depth - 1, map , -my).value; 
+	¡¡¡¡}else { 
+	¡¡¡¡	var val = -AI.getAlphaBeta(-B, -A, depth - 1, map , -my).value; 
 			//val = val || val.value;
 	
-	ã€€ã€€	//æ’¤æ¶ˆè¿™ä¸ªèµ°æ³•;ã€€ 
+	¡¡¡¡	//³·ÏûÕâ¸ö×ß·¨;¡¡ 
 			play.mans[key]	.x = oldX;
 			play.mans[key]	.y = oldY;
 			map[ oldY ][ oldX ] = key;
@@ -190,38 +190,38 @@ AI.getAlphaBeta = function (A, B, depth, map ,my) {
 				 map[ newY ][ newX ] = clearKey;
 				 //play.mans[ clearKey ].isShow = true;
 			}
-	ã€€ã€€	if (val >= B) { 
-				//å°†è¿™ä¸ªèµ°æ³•è®°å½•åˆ°å†å²è¡¨ä¸­; 
+	¡¡¡¡	if (val >= B) { 
+				//½«Õâ¸ö×ß·¨¼ÇÂ¼µ½ÀúÊ·±íÖĞ; 
 				//AI.setHistoryTable(txtMap,AI.treeDepth-depth+1,B,my);
 				return {"key":key,"x":newX,"y":newY,"value":B}; 
 			} 
 			if (val > A) { 
-	ã€€ã€€ã€€ã€€	A = val; //è®¾ç½®æœ€ä½³èµ°æ³•; 
+	¡¡¡¡¡¡¡¡	A = val; //ÉèÖÃ×î¼Ñ×ß·¨; 
 				if (AI.treeDepth == depth) var rootKey={"key":key,"x":newX,"y":newY,"value":A};
 			} 
 		} 
-ã€€	} 
-	//å°†è¿™ä¸ªèµ°æ³•è®°å½•åˆ°å†å²è¡¨ä¸­; 
+¡¡	} 
+	//½«Õâ¸ö×ß·¨¼ÇÂ¼µ½ÀúÊ·±íÖĞ; 
 	//AI.setHistoryTable(txtMap,AI.treeDepth-depth+1,A,my);
-	if (AI.treeDepth == depth) {//å·²ç»é€’å½’å›æ ¹äº†
+	if (AI.treeDepth == depth) {//ÒÑ¾­µİ¹é»Ø¸ùÁË
 		if (!rootKey){
-			//AIæ²¡æœ‰æœ€ä½³èµ°æ³•ï¼Œè¯´æ˜AIè¢«å°†æ­»äº†ï¼Œè¿”å›false
+			//AIÃ»ÓĞ×î¼Ñ×ß·¨£¬ËµÃ÷AI±»½«ËÀÁË£¬·µ»Øfalse
 			return false;
 		}else{
-			//è¿™ä¸ªå°±æ˜¯æœ€ä½³èµ°æ³•;
+			//Õâ¸ö¾ÍÊÇ×î¼Ñ×ß·¨;
 			return rootKey;
 		}
 	}
-ã€€return {"key":key,"x":newX,"y":newY,"value":A}; 
+¡¡return {"key":key,"x":newX,"y":newY,"value":A}; 
 }
 
-//å¥–ç€æ³•è®°å½•åˆ°å†å²è¡¨
+//½±×Å·¨¼ÇÂ¼µ½ÀúÊ·±í
 AI.setHistoryTable = function (txtMap,depth,value,my){
 	AI.setHistoryTable.lenght ++;
 	AI.historyTable[txtMap] = {depth:depth,value:value} 
 }
 
-//è¯„ä¼°æ£‹å±€ å–å¾—æ£‹ç›˜åŒæ–¹æ£‹å­ä»·å€¼å·®
+//ÆÀ¹ÀÆå¾Ö È¡µÃÆåÅÌË«·½Æå×Ó¼ÛÖµ²î
 AI.evaluate = function (map,my){
 	var val=0;
 	for (var i=0; i<map.length; i++){
@@ -232,14 +232,14 @@ AI.evaluate = function (map,my){
 			}
 		}
 	}
-	//val+=Math.floor( Math.random() * 10);  //è®©AIèµ°æ£‹å¢åŠ éšæœºå…ƒç´ 
+	//val+=Math.floor( Math.random() * 10);  //ÈÃAI×ßÆåÔö¼ÓËæ»úÔªËØ
 	//com.show()
 	//z(val*my)
 	AI.number++;
 	return val*my;
 }
 
-//è¯„ä¼°æ£‹å±€ å–å¾—æ£‹ç›˜åŒæ–¹æ£‹å­ä»·å€¼å·®
+//ÆÀ¹ÀÆå¾Ö È¡µÃÆåÅÌË«·½Æå×Ó¼ÛÖµ²î
 AI.evaluate1 = function (map,my){
 	var val=0;
 	for (var i in play.mans){
@@ -248,7 +248,7 @@ AI.evaluate1 = function (map,my){
 			val += man.value[man.y][man.x] * man.my;
 		}
 	}
-	//val+=Math.floor( Math.random() * 10);  //è®©AIèµ°æ£‹å¢åŠ éšæœºå…ƒç´ 
+	//val+=Math.floor( Math.random() * 10);  //ÈÃAI×ßÆåÔö¼ÓËæ»úÔªËØ
 	//com.show()
 	//z(val*my)
 	AI.number++;
